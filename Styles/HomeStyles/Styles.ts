@@ -8,8 +8,7 @@ export const styles = StyleSheet.create({
     justifyContent: 'space-between',
     marginTop: PixelRatio.getPixelSizeForLayoutSize(4),
   },
-  scrollContainer: {
-  },
+  scrollContainer: {flex: 1},
   headerText1: {
     fontFamily: 'Roboto-Semibold',
     fontSize: PixelRatio.getFontScale() * 15,
@@ -75,4 +74,59 @@ export const styles = StyleSheet.create({
     color: 'rgba(0,160,255,1)',
   },
   cardheaderButtton: {},
+  subscriptionCardContainer: {
+    borderBottomLeftRadius: PixelRatio.getPixelSizeForLayoutSize(10),
+    borderBottomRightRadius: PixelRatio.getPixelSizeForLayoutSize(10),
+
+    gap: PixelRatio.getPixelSizeForLayoutSize(4.8),
+  },
+  subscriptionCard: {
+    width: PixelRatio.getPixelSizeForLayoutSize(24.5),
+    height: PixelRatio.getPixelSizeForLayoutSize(24.5),
+    borderRadius: PixelRatio.getPixelSizeForLayoutSize(5),
+    marginTop: PixelRatio.getPixelSizeForLayoutSize(5),
+  },
+  subscriptionCardImage: {
+    width: '100%',
+    height: '100%',
+    borderRadius: PixelRatio.getPixelSizeForLayoutSize(5),
+  },
+  updateCardCont: {
+    gap: PixelRatio.getPixelSizeForLayoutSize(6),
+    backgroundColor: 'transparent',
+    paddingTop: PixelRatio.getPixelSizeForLayoutSize(4.8),
+  },
+  updateCard: {
+    backgroundColor: 'transparent',
+    width: '100%',
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+  },
+  UpdateCardImage: {
+    width: PixelRatio.getPixelSizeForLayoutSize(40),
+    height: PixelRatio.getPixelSizeForLayoutSize(40),
+    borderRadius: PixelRatio.getPixelSizeForLayoutSize(5),
+  },
+  cardTextContainer: {
+    flex: 1,
+    justifyContent: 'space-between',
+    marginLeft: PixelRatio.getPixelSizeForLayoutSize(4),
+  },
+  cardTitle: {
+    fontFamily: 'Roboto-Bold',
+    fontSize: PixelRatio.getFontScale() * 20,
+    color: 'white',
+  },
+  innerTextWrap: {
+    flexDirection: 'row',
+    gap: PixelRatio.getPixelSizeForLayoutSize(2),
+  },
+  cardButton: {
+    borderRadius: PixelRatio.getPixelSizeForLayoutSize(16),
+    backgroundColor: '#9610ff',
+    width: '50%',
+    height: PixelRatio.getPixelSizeForLayoutSize(13),
+    padding: 0,
+    fontSize: PixelRatio.getFontScale() * 10,
+  },
 });
