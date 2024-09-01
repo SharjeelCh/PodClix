@@ -24,7 +24,7 @@ export default class Tabbar extends React.Component<any, any> {
       <TabBar
         unselectedTintColor="#949494"
         tintColor="#33A3F4"
-        barTintColor="rgba(0,0,0,0.8)">
+        barTintColor="rgba(0,0,0,0.7)">
         <TabBar.Item
           title="Home"
           icon={<Icon name="home" />}
