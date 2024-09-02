@@ -1,8 +1,9 @@
-import {View, Text, TouchableOpacity} from 'react-native';
+import {View, Text, TouchableOpacity, PixelRatio} from 'react-native';
 import React from 'react';
 import {styles} from '../../Styles/HomeStyles/Styles';
 import {Avatar} from 'react-native-paper';
 import {Icon} from '@ant-design/react-native';
+import Feather from 'react-native-vector-icons/MaterialIcons';
 
 const Header = () => {
   return (
@@ -23,7 +24,10 @@ const Header = () => {
       <View></View>
       <View></View>
       <TouchableOpacity>
-        <Icon name="bell" />
+        <Feather
+          name="notifications-none"
+          size={PixelRatio.getPixelSizeForLayoutSize(7.5)}
+        />
       </TouchableOpacity>
     </View>
   );

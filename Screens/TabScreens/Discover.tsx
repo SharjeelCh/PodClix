@@ -6,27 +6,40 @@ import {
   TouchableOpacity,
   FlatList,
   Image,
+  Dimensions,
 } from 'react-native';
-import React, {useState} from 'react';
+import React, {memo, useState} from 'react';
 import Header from '../../Components/DiscoverComponents/Header';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {width} from '../../Components/Dimensions';
 import {Searchbar} from 'react-native-paper';
 import {styles} from '../../Styles/DiscoverStyles/Styles';
-import {styles as styles2} from '../../Styles/HomeStyles/Styles';
+import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
+import {LogBox} from 'react-native';
 
-import {Button, SwipeAction, Tabs} from '@ant-design/react-native';
+import PodcastCard from '../../Components/ReusableComponents/PodcastCard';
+import AuthorCard from '../../Components/ReusableComponents/AuthorCard';
+import {useSelector} from 'react-redux';
 
 const BasicTabsExample = () => {
+  const data = useSelector((state: any) => state.podcastData?.data || []);
+  const data2 = useSelector((state: any) => state.authorData.data);
   const [searchQuery, setSearchQuery] = useState('');
-  const tabs = [{title: 'Podcasts'}, {title: 'Authors'}];
+  const FirstRoute = () => <PodcastCard data={data} />;
 
-  const style = {
-    alignItems: 'center',
-    justifyContent: 'center',
-    height: 150,
-    backgroundColor: 'transparent',
-  };
+  const SecondRoute = () => <AuthorCard data2={data2} />;
+  const layout = Dimensions.get('window');
+
+  const [index, setIndex] = useState(0);
+  const [routes] = useState([
+    {key: 'first', title: 'Podcasts'},
+    {key: 'second', title: 'Authors'},
+  ]);
+
+  const renderScene = SceneMap({
+    first: FirstRoute,
+    second: SecondRoute,
+  });
 
   return (
     <GestureHandlerRootView
@@ -34,7 +47,7 @@ const BasicTabsExample = () => {
       <SafeAreaView
         style={{
           flex: 1,
-          backgroundColor: 'rgba(0,0,0,0.9)',
+          backgroundColor: 'rgba(24,26,32,255)',
           paddingHorizontal: width * 0.045,
           gap: PixelRatio.getPixelSizeForLayoutSize(6),
         }}>
@@ -49,56 +62,23 @@ const BasicTabsExample = () => {
           value={searchQuery}
         />
         <View style={{flex: 1}}>
-          <Tabs
-            tabs={tabs}
-            tabBarTextStyle={{color: 'white'}}
-            tabBarBackgroundColor="transparent">
-            <View style={style}>
-              <FlatList
-                data={'sfdfdsfd'}
-                maxToRenderPerBatch={6}
-                showsVerticalScrollIndicator={false}
-                contentContainerStyle={styles2.updateCardCont}
-                renderItem={({item}) => {
-                  return (
-                    <View
-                      style={{
-                        paddingBottom:
-                          PixelRatio.getPixelSizeForLayoutSize(4.8),
-                      }}>
-                      <View>
-                        <View style={styles2.updateCard}>
-                          <TouchableOpacity>
-                            <Image
-                              source={require('../../assets/images/avatar.jpg')}
-                              style={styles2.UpdateCardImage}
-                              resizeMode="cover"
-                            />
-                          </TouchableOpacity>
-                          <View style={styles2.cardTextContainer}>
-                            <Text style={styles2.cardTitle}>
-                              Deep Dive | How to quit your job the right way
-                            </Text>
-                            <View style={styles2.innerTextWrap}>
-                              <Text>Apple Talk</Text>
-                              <Text>|</Text>
-                              <Text>21:53 mins</Text>
-                            </View>
-                            <Button type="primary" style={styles2.cardButton}>
-                              Play
-                            </Button>
-                          </View>
-                        </View>
-                      </View>
-                    </View>
-                  );
-                }}
+          <TabView
+            navigationState={{index, routes}}
+            renderScene={renderScene}
+            onIndexChange={setIndex}
+            initialLayout={{width: layout.width}}
+            renderTabBar={props => (
+              <TabBar
+                {...props}
+                style={styles.tabbar}
+                labelStyle={styles.labelStyle}
+                indicatorStyle={styles.indicator}
+                activeColor="#ac3fff"
+                inactiveColor="gray"
               />
-            </View>
-            <View style={style}>
-              <Text style={{color: 'white'}}>Content of Second Tab</Text>
-            </View>
-          </Tabs>
+            )}
+            lazy={true}
+          />
         </View>
       </SafeAreaView>
     </GestureHandlerRootView>

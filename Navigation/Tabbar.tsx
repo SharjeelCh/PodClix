@@ -1,9 +1,14 @@
-import React from 'react';
+import React, {memo} from 'react';
 import {Icon, TabBar} from '@ant-design/react-native';
 import Home from '../Screens/TabScreens/Home';
 import Discover from '../Screens/TabScreens/Discover';
 import Library from '../Screens/TabScreens/Library';
 import Profile from '../Screens/TabScreens/Profile';
+
+const MemoizedHome = memo(Home);
+const MemoizedDiscover = memo(Discover);
+const MemoizedLibrary = memo(Library);
+const MemoizedProfile = memo(Profile);
 
 export default class Tabbar extends React.Component<any, any> {
   constructor(props: any) {
@@ -13,11 +18,11 @@ export default class Tabbar extends React.Component<any, any> {
     };
   }
 
-  onChangeTab(tabName: any) {
+  onChangeTab = (tabName: any) => {
     this.setState({
       selectedTab: tabName,
     });
-  }
+  };
 
   render() {
     return (
@@ -30,28 +35,28 @@ export default class Tabbar extends React.Component<any, any> {
           icon={<Icon name="home" />}
           selected={this.state.selectedTab === 'homeTab'}
           onPress={() => this.onChangeTab('homeTab')}>
-          <Home />
+          <MemoizedHome />
         </TabBar.Item>
         <TabBar.Item
           icon={<Icon name="compass" />}
           title="Discover"
           selected={this.state.selectedTab === 'discoverTab'}
           onPress={() => this.onChangeTab('discoverTab')}>
-          <Discover />
+          <MemoizedDiscover />
         </TabBar.Item>
         <TabBar.Item
           icon={<Icon name="calendar" />}
           title="Library"
           selected={this.state.selectedTab === 'libraryTab'}
           onPress={() => this.onChangeTab('libraryTab')}>
-          <Library />
+          <MemoizedLibrary />
         </TabBar.Item>
         <TabBar.Item
           icon={<Icon name="user" />}
           title="Profile"
           selected={this.state.selectedTab === 'profileTab'}
           onPress={() => this.onChangeTab('profileTab')}>
-          <Profile />
+          <MemoizedProfile />
         </TabBar.Item>
       </TabBar>
     );

@@ -6,7 +6,7 @@ export const styles = StyleSheet.create({
     alignItems: 'center',
     justifyContent: 'flex-start',
     gap: PixelRatio.getPixelSizeForLayoutSize(6),
-    marginTop: PixelRatio.getPixelSizeForLayoutSize(4),
+    marginTop: PixelRatio.getPixelSizeForLayoutSize(5),
   },
   headerText2: {
     fontFamily: 'Roboto-semiBold',
@@ -19,4 +19,17 @@ export const styles = StyleSheet.create({
     color: 'white',
   },
   inputStyle: {color: 'white', fontFamily: 'Roboto-Regular'},
+  tabbar: {
+    backgroundColor: 'transparent',
+    elevation: 0,
+  },
+  labelStyle: {
+    color: 'white',
+    fontFamily: 'Roboto-Regular',
+    backgroundColor: 'transparent',
+  },
+  indicator: {
+    backgroundColor: '#ac3fff',
+    height: PixelRatio.getPixelSizeForLayoutSize(0.8),
+  },
 });
