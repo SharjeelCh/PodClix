@@ -13,6 +13,7 @@ const AuthorCard = (props: any) => {
       data={props.data2}
       maxToRenderPerBatch={6}
       showsVerticalScrollIndicator={false}
+      fadingEdgeLength={50}
       contentContainerStyle={styles2.updateCardCont}
       initialNumToRender={4}
       renderItem={({item, index}) => {

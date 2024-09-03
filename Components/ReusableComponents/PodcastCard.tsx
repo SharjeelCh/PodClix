@@ -9,6 +9,7 @@ const PodcastCard = memo((props: any) => {
     <FlatList
       data={props.data}
       maxToRenderPerBatch={6}
+      fadingEdgeLength={50}
       showsVerticalScrollIndicator={false}
       initialNumToRender={4}
       contentContainerStyle={styles2.updateCardCont}

@@ -23,8 +23,10 @@ const QueueCard = (props: any) => {
     <FlatList
       data={props.data}
       maxToRenderPerBatch={6}
+      fadingEdgeLength={50}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.updateCardCont}
+      
       renderItem={({item}) => {
         return (
           <View
