@@ -38,4 +38,37 @@ export const styles = StyleSheet.create({
     fontFamily: 'Roboto-Bold',
     color: 'white',
   },
+  LCHeaderText: {
+    fontSize: PixelRatio.getFontScale() * 23,
+    fontFamily: 'Roboto-SemiBold',
+    color: 'white',
+  },
+  formContainer: {
+    width: '100%',
+    flex: 1,
+    height: '100%',
+    borderWidth: 0,
+    backgroundColor: 'transparent',
+    gap: PixelRatio.getPixelSizeForLayoutSize(10),
+  },
+  formItem: {
+    backgroundColor: 'transparent',
+    width: '100%',
+    marginVertical: PixelRatio.getPixelSizeForLayoutSize(2.6),
+  },
+  input: {
+    backgroundColor: '#1e2026',
+    borderRadius: PixelRatio.getPixelSizeForLayoutSize(5),
+    paddingVertical: PixelRatio.getPixelSizeForLayoutSize(3),
+    paddingHorizontal: PixelRatio.getPixelSizeForLayoutSize(7),
+    color: '#fff',
+    borderWidth: 0,
+    margin: 0,
+  },
+  button: {
+    backgroundColor: '#8E44AD',
+    borderRadius: 25,
+    marginTop: 20,
+    paddingVertical: 15,
+  },
 });

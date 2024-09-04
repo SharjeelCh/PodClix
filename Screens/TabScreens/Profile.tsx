@@ -10,10 +10,6 @@ import HeaderProfile from '../../Components/ProfileComponents/HeaderProfile';
 import Button from '../../Components/ProfileComponents/Button';
 
 const Profile = () => {
-  const data = useSelector((state: any) => state.podcastData.data);
-  const data2 = useSelector((state: any) => state.authorData.data);
-
-  console.log(data2);
   return (
     <GestureHandlerRootView
       style={{flex: 1, gap: PixelRatio.getPixelSizeForLayoutSize(6)}}>
@@ -40,7 +36,7 @@ const Profile = () => {
           <Button
             icon={'account-outline'}
             text={'User Profile'}
-            onPress={() => {}}
+            screen='UserProfile'
           />
           <Button
             icon={'pencil-outline'}
@@ -78,11 +74,7 @@ const Profile = () => {
             text={'Help Center'}
             onPress={() => {}}
           />
-          <Button
-            icon={'logout-variant'}
-            text={'Logout'}
-            onPress={() => {}}
-          />
+          <Button icon={'logout-variant'} text={'Logout'} onPress={() => {}} />
         </ScrollView>
       </SafeAreaView>
     </GestureHandlerRootView>

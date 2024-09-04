@@ -129,4 +129,5 @@ export const styles = StyleSheet.create({
     padding: 0,
     fontSize: PixelRatio.getFontScale() * 10,
   },
+ 
 });

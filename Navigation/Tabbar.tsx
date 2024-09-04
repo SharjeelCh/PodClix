@@ -1,64 +1,68 @@
 import React, {memo} from 'react';
-import {Icon, TabBar} from '@ant-design/react-native';
+import {BottomNavigation} from 'react-native-paper';
+import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
+
 import Home from '../Screens/TabScreens/Home';
 import Discover from '../Screens/TabScreens/Discover';
 import Library from '../Screens/TabScreens/Library';
 import Profile from '../Screens/TabScreens/Profile';
+import {Easing} from 'react-native';
 
 const MemoizedHome = memo(Home);
 const MemoizedDiscover = memo(Discover);
 const MemoizedLibrary = memo(Library);
 const MemoizedProfile = memo(Profile);
 
-export default class Tabbar extends React.Component<any, any> {
-  constructor(props: any) {
-    super(props);
-    this.state = {
-      selectedTab: 'homeTab',
-    };
-  }
+export const Tabbar = () => {
+  const [index, setIndex] = React.useState(0);
+  const [routes] = React.useState([
+    {
+      key: 'home',
+      title: 'Home',
+      icon: 'home',
+    },
+    {
+      key: 'discover',
+      title: 'Discover',
+      icon: 'compass',
+    },
+    {
+      key: 'library',
+      title: 'Library',
+      icon: 'calendar',
+    },
+    {
+      key: 'profile',
+      title: 'Profile',
+      icon: 'account',
+    },
+  ]);
 
-  onChangeTab = (tabName: any) => {
-    this.setState({
-      selectedTab: tabName,
-    });
-  };
+  const renderScene = BottomNavigation.SceneMap({
+    home: MemoizedHome,
+    discover: MemoizedDiscover,
+    library: MemoizedLibrary,
+    profile: MemoizedProfile,
+  });
 
-  render() {
-    return (
-      <TabBar
-        unselectedTintColor="#949494"
-        tintColor="#33A3F4"
-        barTintColor="rgba(0,0,0,0.7)">
-        <TabBar.Item
-          title="Home"
-          icon={<Icon name="home" />}
-          selected={this.state.selectedTab === 'homeTab'}
-          onPress={() => this.onChangeTab('homeTab')}>
-          <MemoizedHome />
-        </TabBar.Item>
-        <TabBar.Item
-          icon={<Icon name="compass" />}
-          title="Discover"
-          selected={this.state.selectedTab === 'discoverTab'}
-          onPress={() => this.onChangeTab('discoverTab')}>
-          <MemoizedDiscover />
-        </TabBar.Item>
-        <TabBar.Item
-          icon={<Icon name="calendar" />}
-          title="Library"
-          selected={this.state.selectedTab === 'libraryTab'}
-          onPress={() => this.onChangeTab('libraryTab')}>
-          <MemoizedLibrary />
-        </TabBar.Item>
-        <TabBar.Item
-          icon={<Icon name="user" />}
-          title="Profile"
-          selected={this.state.selectedTab === 'profileTab'}
-          onPress={() => this.onChangeTab('profileTab')}>
-          <MemoizedProfile />
-        </TabBar.Item>
-      </TabBar>
-    );
-  }
-}
+  return (
+    <BottomNavigation
+      navigationState={{index, routes}}
+      onIndexChange={setIndex}
+      renderScene={renderScene}
+      shifting={false}
+      inactiveColor="#949494"
+      activeColor="#33A3F4"
+      keyboardHidesNavigationBar={true}
+      sceneAnimationType="shifting"
+      activeIndicatorStyle={{backgroundColor: 'transparent'}}
+      getLazy={() => {
+        return true;
+      }}
+      barStyle={{backgroundColor: 'rgba(24,26,32,255)'}}
+      renderIcon={({route, focused, color}) => (
+        <Icon name={route.icon} color={color} size={24} />
+      )}
+    />
+  );
+};

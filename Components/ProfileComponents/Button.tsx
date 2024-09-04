@@ -4,9 +4,16 @@ import {styles} from '../../Styles/ProfileStyles/style';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import {WhiteSpace, Switch, List} from '@ant-design/react-native';
 import Micon from 'react-native-vector-icons/MaterialCommunityIcons';
+import {useNavigation} from '@react-navigation/native';
 const Button = (props: any) => {
+  const navigation = useNavigation();
+  const handlePress = () => {
+    {
+      props.text !== 'Dark Mode' ? navigation.navigate(props.screen) : null;
+    }
+  };
   return (
-    <TouchableOpacity style={styles.buttonContainer}>
+    <TouchableOpacity style={styles.buttonContainer} onPress={handlePress}>
       <Micon
         name={props.icon}
         color={'white'}

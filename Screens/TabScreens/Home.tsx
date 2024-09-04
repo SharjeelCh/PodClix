@@ -15,12 +15,13 @@ import Subscription from '../../Components/HomeComponents/Subscription';
 import {GestureHandlerRootView, ScrollView} from 'react-native-gesture-handler';
 import CardHeader from '../../Components/HomeComponents/CardHeader';
 import {Button, List, Provider, SwipeAction} from '@ant-design/react-native';
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
 import {setAuthorData, setPodcastData} from '../../Redux/createSlice';
+import {useNavigation} from '@react-navigation/native';
 
 export default function Home() {
   const dispatch = useDispatch();
-
+  const navigation = useNavigation();
   useEffect(() => {
     const podcastData = [
       {
@@ -52,6 +53,8 @@ export default function Home() {
     dispatch(setPodcastData(podcastData));
     dispatch(setAuthorData(authorData));
   }, []);
+  const data = useSelector((state: any) => state.podcastData?.data || []);
+  const data2 = useSelector((state: any) => state.authorData.data);
   const right = [
     {
       text: '▶',
@@ -109,7 +112,7 @@ export default function Home() {
               return (
                 <FlatList
                   initialNumToRender={4}
-                  data={item.data}
+                  data={data2}
                   horizontal
                   maxToRenderPerBatch={6}
                   fadingEdgeLength={30}
@@ -145,7 +148,7 @@ export default function Home() {
                     }}
                   />
                   <FlatList
-                    data={item.data}
+                    data={data}
                     maxToRenderPerBatch={6}
                     initialNumToRender={3}
                     showsVerticalScrollIndicator={false}
@@ -162,7 +165,10 @@ export default function Home() {
                             closeOnAction
                             closeOnTouchOutside>
                             <View style={styles.updateCard}>
-                              <TouchableOpacity>
+                              <TouchableOpacity
+                                onPress={() => {
+                                  navigation.navigate('VideoPlayScreen',{item:item});
+                                }}>
                                 <Image
                                   source={require('../../assets/images/avatar.jpg')}
                                   style={styles.UpdateCardImage}
@@ -171,12 +177,12 @@ export default function Home() {
                               </TouchableOpacity>
                               <View style={styles.cardTextContainer}>
                                 <Text style={styles.cardTitle}>
-                                  Deep Dive | How to quit your job the right way
+                                  {item.title}
                                 </Text>
                                 <View style={styles.innerTextWrap}>
-                                  <Text>Apple Talk</Text>
+                                  <Text>{item.Channel}</Text>
                                   <Text>|</Text>
-                                  <Text>21:53 mins</Text>
+                                  <Text>{item.duration}</Text>
                                 </View>
                                 <Button
                                   type="primary"
