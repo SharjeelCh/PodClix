@@ -5,9 +5,19 @@ import {styles as styles2} from '../../Styles/HomeStyles/Styles';
 import {Button} from '@ant-design/react-native';
 import {Divider} from 'react-native-paper';
 import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../Navigation/MainNav';
 
+type VideoPlayScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'VideoPlayScreen'
+>;
+
+type Props = {
+  navigation: VideoPlayScreenNavigationProp;
+};
 const PodcastCard = memo((props: any) => {
-  const navigation = useNavigation();
+  const navigation = useNavigation<VideoPlayScreenNavigationProp>();
   return (
     <FlatList
       data={props.data}

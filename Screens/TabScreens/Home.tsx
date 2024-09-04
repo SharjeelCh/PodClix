@@ -18,10 +18,32 @@ import {Button, List, Provider, SwipeAction} from '@ant-design/react-native';
 import {useDispatch, useSelector} from 'react-redux';
 import {setAuthorData, setPodcastData} from '../../Redux/createSlice';
 import {useNavigation} from '@react-navigation/native';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../Navigation/MainNav';
+
+type VideoPlayScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'VideoPlayScreen'
+>;
+
+type Props = {
+  navigation: VideoPlayScreenNavigationProp;
+};
+
+type AuthorPlayScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'AuthorPlayScreen'
+>;
+
+type Props2 = {
+  navigation: AuthorPlayScreenNavigationProp;
+};
 
 export default function Home() {
   const dispatch = useDispatch();
-  const navigation = useNavigation();
+  const navigation = useNavigation<VideoPlayScreenNavigationProp>();
+  const navigation2 = useNavigation<AuthorPlayScreenNavigationProp>();
+
   useEffect(() => {
     const podcastData = [
       {
@@ -123,7 +145,9 @@ export default function Home() {
                       <TouchableOpacity
                         style={styles.subscriptionCard}
                         onPress={() => {
-                          navigation.navigate('AuthorPlayScreen', {item: item});
+                          navigation2.navigate('AuthorPlayScreen', {
+                            item: item,
+                          });
                         }}>
                         <Image
                           source={require('../../assets/images/avatar.jpg')}

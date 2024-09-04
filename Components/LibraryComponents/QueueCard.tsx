@@ -6,13 +6,24 @@ import {
   TouchableOpacity,
   Image,
 } from 'react-native';
-import React from 'react';
+import React, {memo} from 'react';
 import {styles} from '../../Styles/HomeStyles/Styles';
 import {Button, SwipeAction} from '@ant-design/react-native';
 import {useNavigation} from '@react-navigation/native';
+import {RootStackParamList} from '../../Navigation/MainNav';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 
-const QueueCard = (props: any) => {
-  const navigation = useNavigation();
+type VideoPlayScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'VideoPlayScreen'
+>;
+
+type Props = {
+  navigation: VideoPlayScreenNavigationProp;
+};
+
+const QueueCard = memo((props: any) => {
+  const navigation = useNavigation<VideoPlayScreenNavigationProp>();
   const left = [
     {
       text: '❌',
@@ -69,6 +80,5 @@ const QueueCard = (props: any) => {
       }}
     />
   );
-};
-
+});
 export default QueueCard;
