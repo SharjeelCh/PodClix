@@ -25,7 +25,7 @@ const BasicTabsExample = () => {
   const data = useSelector((state: any) => state.podcastData?.data || []);
   const data2 = useSelector((state: any) => state.authorData.data);
   const [searchQuery, setSearchQuery] = useState('');
-  const FirstRoute = () => <PodcastCard data={data} />;
+  const FirstRoute = () => <PodcastCard data={data} profile={'discover'}/>;
 
   const SecondRoute = () => <AuthorCard data2={data2} />;
   const layout = Dimensions.get('window');

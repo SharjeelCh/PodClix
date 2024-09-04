@@ -9,8 +9,10 @@ import {
 import React from 'react';
 import {styles} from '../../Styles/HomeStyles/Styles';
 import {Button, SwipeAction} from '@ant-design/react-native';
+import {useNavigation} from '@react-navigation/native';
 
 const QueueCard = (props: any) => {
+  const navigation = useNavigation();
   const left = [
     {
       text: '❌',
@@ -26,7 +28,6 @@ const QueueCard = (props: any) => {
       fadingEdgeLength={50}
       showsVerticalScrollIndicator={false}
       contentContainerStyle={styles.updateCardCont}
-      
       renderItem={({item}) => {
         return (
           <View
@@ -35,7 +36,10 @@ const QueueCard = (props: any) => {
             }}>
             <SwipeAction right={left} closeOnAction closeOnTouchOutside>
               <View style={styles.updateCard}>
-                <TouchableOpacity>
+                <TouchableOpacity
+                  onPress={() => {
+                    navigation.navigate('VideoPlayScreen', {item: item});
+                  }}>
                   <Image
                     source={require('../../assets/images/avatar.jpg')}
                     style={styles.UpdateCardImage}
@@ -49,8 +53,13 @@ const QueueCard = (props: any) => {
                     <Text>|</Text>
                     <Text>{item.duration}</Text>
                   </View>
-                  <Button type="primary" style={styles.cardButton}>
-                    Play
+                  <Button
+                    type="primary"
+                    style={styles.cardButton}
+                    onPress={() => {
+                      navigation.navigate('VideoPlayScreen', {item: item});
+                    }}>
+                    ▶ Play
                   </Button>
                 </View>
               </View>

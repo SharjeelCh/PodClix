@@ -4,10 +4,11 @@ import {FlatList} from 'react-native-gesture-handler';
 import {styles as styles2} from '../../Styles/HomeStyles/Styles';
 import {Button, Tooltip} from '@ant-design/react-native';
 import EvilIcons from 'react-native-vector-icons/MaterialCommunityIcons';
+import { useNavigation } from '@react-navigation/native';
 
 const AuthorCard = (props: any) => {
   const [showToolTip, setShowToolTip] = useState(false);
-  console.log(props.data2);
+  const navigation=useNavigation()
   return (
     <FlatList
       data={props.data2}
@@ -25,7 +26,9 @@ const AuthorCard = (props: any) => {
             }}>
             <View>
               <View style={[styles2.updateCard, {alignItems: 'center'}]}>
-                <TouchableOpacity onPress={props.handleImageClick}>
+                <TouchableOpacity  onPress={() => {
+                          navigation.navigate('AuthorPlayScreen', {item: item});
+                        }}>
                   <Image
                     source={require('../../assets/images/avatar.jpg')}
                     style={styles2.UpdateCardImage}

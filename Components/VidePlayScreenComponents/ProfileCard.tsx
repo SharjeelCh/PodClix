@@ -1,7 +1,7 @@
 import {View, Text, TouchableOpacity, PixelRatio, Image} from 'react-native';
 import React from 'react';
 import EvilIcons from 'react-native-vector-icons/MaterialCommunityIcons';
-import {styles as styles2} from '../../Styles/VideoPlaceScreenStyle';
+import {styles as styles2} from '../../Styles/PlayScreenStyles/VideoPlaceScreenStyle';
 import {truncateText} from '../../HelperFunctions/CommonFunctions';
 
 const ProfileCard = (props: any) => {

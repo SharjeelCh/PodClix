@@ -120,7 +120,11 @@ export default function Home() {
                   contentContainerStyle={styles.subscriptionCardContainer}
                   renderItem={({item}) => {
                     return (
-                      <TouchableOpacity style={styles.subscriptionCard}>
+                      <TouchableOpacity
+                        style={styles.subscriptionCard}
+                        onPress={() => {
+                          navigation.navigate('AuthorPlayScreen', {item: item});
+                        }}>
                         <Image
                           source={require('../../assets/images/avatar.jpg')}
                           style={styles.subscriptionCardImage}
@@ -167,7 +171,9 @@ export default function Home() {
                             <View style={styles.updateCard}>
                               <TouchableOpacity
                                 onPress={() => {
-                                  navigation.navigate('VideoPlayScreen',{item:item});
+                                  navigation.navigate('VideoPlayScreen', {
+                                    item: item,
+                                  });
                                 }}>
                                 <Image
                                   source={require('../../assets/images/avatar.jpg')}
@@ -185,9 +191,14 @@ export default function Home() {
                                   <Text>{item.duration}</Text>
                                 </View>
                                 <Button
+                                  onPress={() => {
+                                    navigation.navigate('VideoPlayScreen', {
+                                      item: item,
+                                    });
+                                  }}
                                   type="primary"
                                   style={styles.cardButton}>
-                                  Play
+                                  ▶ Play
                                 </Button>
                               </View>
                             </View>

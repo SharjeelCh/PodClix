@@ -6,7 +6,7 @@ import {
   TouchableOpacity,
   ScrollView,
 } from 'react-native';
-import React, {useRef} from 'react';
+import React, {useRef, useState} from 'react';
 import {Route, useRoute} from '@react-navigation/native';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {SafeAreaView} from 'react-native-safe-area-context';
@@ -14,7 +14,7 @@ import {width} from '../../Components/Dimensions';
 import LessCommonHeader from '../../Components/ReusableComponents/LessCommonHeader';
 import {truncateText} from '../../HelperFunctions/CommonFunctions';
 import ProfileCard from '../../Components/VidePlayScreenComponents/ProfileCard';
-import {styles as styles2} from '../../Styles/VideoPlaceScreenStyle';
+import {styles as styles2} from '../../Styles/PlayScreenStyles/VideoPlaceScreenStyle';
 import {Button} from '@ant-design/react-native';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {List} from 'react-native-paper';
@@ -24,6 +24,7 @@ import FAIcon from 'react-native-vector-icons/FontAwesome';
 const VideoPlayScreen = () => {
   const route = useRoute();
   const refRBSheet = useRef(null) as any;
+  const [bookMark, setBookMark] = useState(false);
 
   const onshare = () => {
     if (refRBSheet.current) {
@@ -43,7 +44,7 @@ const VideoPlayScreen = () => {
         }}>
         <LessCommonHeader text={truncateText(item.title, 33)} />
         <ProfileCard
-          name={'John Hamburger Show'}
+          name={item.Channel}
           podcasts={'685'}
           data={item}
           onshare={onshare}
@@ -53,12 +54,23 @@ const VideoPlayScreen = () => {
           <Button type="primary" style={styles2.cardButton}>
             ▶ Play
           </Button>
-          <TouchableOpacity>
-            <Icon
-              name="bookmark-multiple-outline"
-              size={PixelRatio.getPixelSizeForLayoutSize(6)}
-              color="white"
-            />
+          <TouchableOpacity
+            onPress={() => {
+              setBookMark(!bookMark);
+            }}>
+            {!bookMark ? (
+              <Icon
+                name="bookmark-multiple-outline"
+                size={PixelRatio.getPixelSizeForLayoutSize(6)}
+                color="white"
+              />
+            ) : (
+              <Icon
+                name="bookmark-multiple"
+                size={PixelRatio.getPixelSizeForLayoutSize(6)}
+                color="white"
+              />
+            )}
           </TouchableOpacity>
         </View>
         <ScrollView

@@ -4,6 +4,7 @@ import {createNativeStackNavigator} from '@react-navigation/native-stack';
 import UserProfile from '../Components/ProfileComponents/ProfileScreens/UserProfile';
 import { Tabbar } from './Tabbar';
 import VideoPlayScreen from '../Screens/PlayBackScreens/VideoPlayScreen';
+import AuthorPlayScreen from '../Screens/PlayBackScreens/AuthorPlayScreen';
 
 const MainNav = () => {
   const mainNav = createNativeStackNavigator();
@@ -22,6 +23,11 @@ const MainNav = () => {
       <mainNav.Screen
       name='VideoPlayScreen'
       component={VideoPlayScreen}
+      options={{headerShown:false}}
+      />
+      <mainNav.Screen
+      name='AuthorPlayScreen'
+      component={AuthorPlayScreen}
       options={{headerShown:false}}
       />
     </mainNav.Navigator>
