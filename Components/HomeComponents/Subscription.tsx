@@ -4,7 +4,7 @@ import {styles} from '../../Styles/HomeStyles/Styles';
 import LinearGradient from 'react-native-linear-gradient';
 import {Button} from '@ant-design/react-native';
 import {Image} from 'react-native';
-const Subscription = () => {
+const Subscription = ({setIsVisible}:any) => {
   return (
     <LinearGradient
       colors={['#b85bff', '#a026ff']}
@@ -15,7 +15,7 @@ const Subscription = () => {
           Enjoy listening podcast with better audio quality, without
           restrictions and withoud ads
         </Text>
-        <Button style={styles.subscriptionButton}>Get Premium</Button>
+        <Button style={styles.subscriptionButton} onPress={()=>{setIsVisible(true)}}>Get Premium</Button>
       </View>
       <Image
         style={styles.subscriptionImage}

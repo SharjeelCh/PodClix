@@ -8,8 +8,11 @@ import {useSelector} from 'react-redux';
 import Subscription from '../../Components/HomeComponents/Subscription';
 import HeaderProfile from '../../Components/ProfileComponents/HeaderProfile';
 import Button from '../../Components/ProfileComponents/Button';
+import SubscribeToPremium from '../../Components/ReusableComponents/SubscribeToPremium';
 
 const Profile = () => {
+  const [isVisible, setIsVisible] = React.useState(false);
+
   return (
     <GestureHandlerRootView
       style={{flex: 1, gap: PixelRatio.getPixelSizeForLayoutSize(6)}}>
@@ -32,7 +35,7 @@ const Profile = () => {
             gap: PixelRatio.getPixelSizeForLayoutSize(6),
             paddingBottom: PixelRatio.getPixelSizeForLayoutSize(6),
           }}>
-          <Subscription />
+          <Subscription setIsVisible={setIsVisible} />
           <Button
             icon={'account-outline'}
             text={'User Profile'}
@@ -76,6 +79,8 @@ const Profile = () => {
           />
           <Button icon={'logout-variant'} text={'Logout'} onPress={() => {}} />
         </ScrollView>
+        <SubscribeToPremium isVisible={isVisible} setIsVisible={setIsVisible}/>
+
       </SafeAreaView>
     </GestureHandlerRootView>
   );

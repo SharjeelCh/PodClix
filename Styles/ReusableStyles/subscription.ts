@@ -1,0 +1,95 @@
+import {PixelRatio, StyleSheet} from 'react-native';
+import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {height} from '../../Components/Dimensions';
+export const styles = StyleSheet.create({
+  subsContainer: {
+    flex: 1,
+    backgroundColor: 'rgba(24,26,32,255)',
+    padding: PixelRatio.getFontScale() * 15,
+    margin: 0,
+    justifyContent: 'flex-start',
+    gap: height * 0.04,
+  },
+  active: {
+    backgroundColor: 'rgba(255,255,255,0.15)',
+    transform: [{scale: 1.01}],
+    borderColor: '#9401ff',
+  },
+  innerCont: {
+    alignItems: 'center',
+    justifyContent: 'center',
+    gap: height * 0.02,
+  },
+  mainText: {
+    color: '#9610ff',
+    fontFamily: 'Roboto-Bold',
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(9),
+    fontWeight: 'bold',
+  },
+  secondary: {
+    color: 'rgba(255,255,255,0.7)',
+    fontFamily: 'Roboto-semiBold',
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(5),
+    textAlign: 'center',
+  },
+  typeButton: {
+    width: '100%',
+    padding: height * 0.016,
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderRadius: 16,
+    borderWidth: 0.8,
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderColor: '#9610ff',
+  },
+  priceCont: {
+    flexDirection: 'row',
+    justifyContent: 'center',
+    width: '100%',
+    alignItems: 'center',
+    paddingVertical: PixelRatio.getFontScale() * 8,
+  },
+  priceMonthly: {
+    color: 'white',
+    fontFamily: 'Roboto-Bold',
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(8),
+  },
+  monthText: {
+    color: 'rgba(255,255,255,0.7)',
+    fontFamily: 'Roboto-semiBold',
+    fontSize: PixelRatio.getPixelSizeForLayoutSize(5),
+  },
+  divider: {
+    width: '100%',
+    backgroundColor: 'rgba(255,255,255,0.2)',
+    marginBottom: height * 0.013,
+  },
+  descriptionText: {
+    flexDirection: 'row',
+    justifyContent: 'flex-start',
+    width: '100%',
+    paddingVertical: height * 0.011,
+    gap: height * 0.02,
+  },
+  selectButton: {
+    width: '100%',
+    padding: height * 0.02,
+    backgroundColor: 'rgba(255,255,255,0.1)',
+    borderRadius: 16,
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+  },
+  continueButton: {
+    position: 'absolute',
+    bottom: 25,
+    width: '100%',
+    backgroundColor: '#9610ff',
+    padding: height * 0.02,
+    alignSelf: 'center',
+    justifyContent: 'center',
+    alignItems: 'center',
+    borderRadius: 40,
+    elevation: 10,
+  },
+});

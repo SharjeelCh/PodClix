@@ -5,6 +5,7 @@ import {
   Touchable,
   TouchableOpacity,
   ScrollView,
+  StyleSheet,
 } from 'react-native';
 import React, {useRef, useState} from 'react';
 import {Route, useRoute} from '@react-navigation/native';
@@ -73,6 +74,7 @@ const VideoPlayScreen = () => {
             )}
           </TouchableOpacity>
         </View>
+
         <ScrollView
           showsVerticalScrollIndicator={false}
           contentContainerStyle={{
@@ -145,3 +147,14 @@ const VideoPlayScreen = () => {
 };
 
 export default VideoPlayScreen;
+const styless = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  backgroundVideo: {
+    width: '100%',
+    height: 300,
+  },
+});

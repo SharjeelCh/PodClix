@@ -54,7 +54,7 @@ export const Tabbar = () => {
       inactiveColor="#949494"
       activeColor="#33A3F4"
       keyboardHidesNavigationBar={true}
-      sceneAnimationType="shifting"
+      sceneAnimationType='opacity'
       activeIndicatorStyle={{backgroundColor: 'transparent'}}
       getLazy={() => {
         return true;

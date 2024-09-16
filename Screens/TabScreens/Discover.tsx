@@ -3,30 +3,34 @@ import {
   Text,
   PixelRatio,
   SafeAreaView,
-  TouchableOpacity,
-  FlatList,
-  Image,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native';
-import React, {memo, useState} from 'react';
+import React, {memo, useState, useEffect} from 'react';
 import Header from '../../Components/DiscoverComponents/Header';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {width} from '../../Components/Dimensions';
 import {Searchbar} from 'react-native-paper';
 import {styles} from '../../Styles/DiscoverStyles/Styles';
 import {TabView, SceneMap, TabBar} from 'react-native-tab-view';
-import {LogBox} from 'react-native';
 
 import PodcastCard from '../../Components/ReusableComponents/PodcastCard';
 import AuthorCard from '../../Components/ReusableComponents/AuthorCard';
 import {useSelector} from 'react-redux';
 
 const BasicTabsExample = () => {
+  const [loading, setLoading] = useState(true);
   const data = useSelector((state: any) => state.podcastData?.data || []);
   const data2 = useSelector((state: any) => state.authorData.data);
-  const [searchQuery, setSearchQuery] = useState('');
-  const FirstRoute = () => <PodcastCard data={data} profile={'discover'}/>;
 
+  useEffect(() => {
+    if (data.length > 0 && data2) {
+      setLoading(false);
+    }
+  }, [data, data2]);
+
+  const [searchQuery, setSearchQuery] = useState('');
+  const FirstRoute = () => <PodcastCard data={data} profile={'discover'} />;
   const SecondRoute = () => <AuthorCard data2={data2} />;
   const layout = Dimensions.get('window');
 
@@ -62,23 +66,30 @@ const BasicTabsExample = () => {
           value={searchQuery}
         />
         <View style={{flex: 1}}>
-          <TabView
-            navigationState={{index, routes}}
-            renderScene={renderScene}
-            onIndexChange={setIndex}
-            initialLayout={{width: layout.width}}
-            renderTabBar={props => (
-              <TabBar
-                {...props}
-                style={styles.tabbar}
-                labelStyle={styles.labelStyle}
-                indicatorStyle={styles.indicator}
-                activeColor="#ac3fff"
-                inactiveColor="gray"
-              />
-            )}
-            lazy={true}
-          />
+          {loading ? (
+            <View
+              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <ActivityIndicator size="large" color="#ac3fff" />
+            </View>
+          ) : (
+            <TabView
+              navigationState={{index, routes}}
+              renderScene={renderScene}
+              onIndexChange={setIndex}
+              initialLayout={{width: layout.width}}
+              renderTabBar={props => (
+                <TabBar
+                  {...props}
+                  style={styles.tabbar}
+                  labelStyle={styles.labelStyle}
+                  indicatorStyle={styles.indicator}
+                  activeColor="#ac3fff"
+                  inactiveColor="gray"
+                />
+              )}
+              lazy={true}
+            />
+          )}
         </View>
       </SafeAreaView>
     </GestureHandlerRootView>

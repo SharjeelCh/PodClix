@@ -5,8 +5,9 @@ import {
   PixelRatio,
   LogBox,
   Dimensions,
+  ActivityIndicator,
 } from 'react-native';
-import React, {memo, useState} from 'react';
+import React, {memo, useEffect, useState} from 'react';
 import {GestureHandlerRootView} from 'react-native-gesture-handler';
 import {width} from '../../Components/Dimensions';
 import Header from '../../Components/DiscoverComponents/Header';
@@ -22,9 +23,17 @@ LogBox.ignoreLogs([
 
 const Library = () => {
   const [index, setIndex] = useState(0);
+  const [loading, setLoading] = useState(true);
+
   const layout = Dimensions.get('window');
   const data = useSelector((state: any) => state.podcastData?.data || []);
   const data2 = useSelector((state: any) => state.authorData.data);
+
+  useEffect(() => {
+    if (data.length > 0 && data2) {
+      setLoading(false);
+    }
+  }, [data, data2]);
 
   const [routes] = useState([
     {key: 'first', title: 'Subscriptions'},
@@ -51,23 +60,30 @@ const Library = () => {
         }}>
         <Header text={'My Library'} />
         <View style={{flex: 1}}>
-          <TabView
-            navigationState={{index, routes}}
-            renderScene={renderScene}
-            onIndexChange={setIndex}
-            initialLayout={{width: layout.width}}
-            renderTabBar={restProps => (
-              <TabBar
-                {...restProps}
-                style={styles.tabbar}
-                labelStyle={styles.labelStyle}
-                indicatorStyle={styles.indicator}
-                activeColor="#ac3fff"
-                inactiveColor="gray"
-              />
-            )}
-            lazy={true}
-          />
+          {loading ? (
+            <View
+              style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
+              <ActivityIndicator size="large" color="#ac3fff" />
+            </View>
+          ) : (
+            <TabView
+              navigationState={{index, routes}}
+              renderScene={renderScene}
+              onIndexChange={setIndex}
+              initialLayout={{width: layout.width}}
+              renderTabBar={restProps => (
+                <TabBar
+                  {...restProps}
+                  style={styles.tabbar}
+                  labelStyle={styles.labelStyle}
+                  indicatorStyle={styles.indicator}
+                  activeColor="#ac3fff"
+                  inactiveColor="gray"
+                />
+              )}
+              lazy={true}
+            />
+          )}
         </View>
       </SafeAreaView>
     </GestureHandlerRootView>

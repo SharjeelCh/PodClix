@@ -3,8 +3,19 @@ import React from 'react';
 import EvilIcons from 'react-native-vector-icons/MaterialCommunityIcons';
 import {styles as styles2} from '../../Styles/PlayScreenStyles/VideoPlaceScreenStyle';
 import {truncateText} from '../../HelperFunctions/CommonFunctions';
+import {NativeStackNavigationProp} from '@react-navigation/native-stack';
+import {RootStackParamList} from '../../Navigation/MainNav';
+import {useNavigation} from '@react-navigation/native';
+type VideoPlayScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  'VideoPlayScreen'
+>;
 
+type Props = {
+  navigation: VideoPlayScreenNavigationProp;
+};
 const ProfileCard = (props: any) => {
+  const navigation = useNavigation<VideoPlayScreenNavigationProp>();
   return (
     <View
       style={{
@@ -33,7 +44,9 @@ const ProfileCard = (props: any) => {
             <View style={styles2.innerTextWrap}>
               <Text style={styles2.innerText}>{props.podcasts} podcasts</Text>
             </View>
-            <TouchableOpacity style={styles2.shareButton} onPress={props.onshare}>
+            <TouchableOpacity
+              style={styles2.shareButton}
+              onPress={props.onshare}>
               <EvilIcons
                 name="share-variant-outline"
                 size={PixelRatio.getPixelSizeForLayoutSize(6)}
