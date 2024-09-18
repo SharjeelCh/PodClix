@@ -7,12 +7,20 @@ import AuthorPlayScreen from '../Screens/PlayBackScreens/AuthorPlayScreen';
 
 import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RouteProp} from '@react-navigation/native';
+import Splash from '../Screens/Splash/Splash';
+import GetStarted from '../Screens/Splash/GetStarted';
+import AuthStack from './AuthStack';
+import RegisterStack from './RegisterStack';
 
 export type RootStackParamList = {
   Tabbar: undefined;
   UserProfile: {userId: any};
   VideoPlayScreen: {item: any};
   AuthorPlayScreen: {item: string};
+  Splash: undefined;
+  GetStarted:undefined
+  AuthStack:undefined
+  RegisterStack:undefined
 };
 
 export type UserProfileNavigationProp = NativeStackNavigationProp<
@@ -29,6 +37,26 @@ const MainNav = () => {
 
   return (
     <mainNav.Navigator>
+      <mainNav.Screen
+        options={{headerShown: false}}
+        name="Splash"
+        component={Splash}
+      />
+      <mainNav.Screen
+        options={{headerShown: false}}
+        name="GetStarted"
+        component={GetStarted}
+      />
+      <mainNav.Screen
+        options={{headerShown: false}}
+        name="AuthStack"
+        component={AuthStack}
+      />
+      <mainNav.Screen
+        options={{headerShown: false}}
+        name="RegisterStack"
+        component={RegisterStack}
+      />
       <mainNav.Screen
         options={{headerShown: false}}
         name="Tabbar"

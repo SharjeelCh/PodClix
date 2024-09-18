@@ -6,7 +6,6 @@ import Home from '../Screens/TabScreens/Home';
 import Discover from '../Screens/TabScreens/Discover';
 import Library from '../Screens/TabScreens/Library';
 import Profile from '../Screens/TabScreens/Profile';
-import {Easing} from 'react-native';
 
 const MemoizedHome = memo(Home);
 const MemoizedDiscover = memo(Discover);
