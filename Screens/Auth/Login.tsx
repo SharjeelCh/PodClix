@@ -6,13 +6,16 @@ import {
   TextInput,
   KeyboardAvoidingView,
   TouchableOpacity,
+  ScrollView,
+  TouchableHighlight,
+  Button,
 } from 'react-native';
-import React from 'react';
+import React, {useEffect} from 'react';
 import {styles} from '../../Styles/AuthStyles/LoginStyles';
 import Icon from 'react-native-vector-icons/MaterialCommunityIcons';
 import {PixelRatio} from 'react-native';
 import {height, width} from '../../Components/Dimensions';
-import {useSafeAreaInsets} from 'react-native-safe-area-context';
+import {SafeAreaView, useSafeAreaInsets} from 'react-native-safe-area-context';
 import SocialButton from '../../Components/AuthReusableComponents/SocialButton';
 import Divider from '../../Components/AuthReusableComponents/Divider';
 import NeonButton from '../../Components/AuthReusableComponents/NeonButton';
@@ -21,6 +24,10 @@ import {NativeStackNavigationProp} from '@react-navigation/native-stack';
 import {RootStackParamList} from '../../Navigation/AuthStack';
 import {RootStackParamList as RootStackParamListRegister} from '../../Navigation/MainNav';
 import {Checkbox} from 'react-native-paper';
+import {useForm, Controller} from 'react-hook-form';
+import {ShowErrorToast, ShowSuccessToast} from '../../Components/Toasts/Toast';
+import {toast} from '@backpackapp-io/react-native-toast';
+
 type loginScreenProps = NativeStackNavigationProp<RootStackParamList, 'Login'>;
 type RegsiterProps = NativeStackNavigationProp<
   RootStackParamListRegister,
@@ -33,11 +40,28 @@ const Login = () => {
   const top = useSafeAreaInsets().top;
   const left = useSafeAreaInsets().left;
   const [check, setCheck] = React.useState(false);
+  const [secure, setSecure] = React.useState(true);
   const iconPaths = [
     require('../../assets/images/socialIcons/google.png'),
     require('../../assets/images/socialIcons/facebook.png'),
     require('../../assets/images/socialIcons/phone.png'),
   ];
+
+  const {
+    control,
+    handleSubmit,
+    formState: {errors},
+  } = useForm({
+    defaultValues: {
+      email: '',
+      password: '',
+    },
+  });
+  const onSubmit = (data: any) => {
+    ShowSuccessToast('Login Successful');
+    navigation2.navigate('Tabbar');
+  };
+
   return (
     <KeyboardAvoidingView behavior="padding" style={styles.container}>
       <Pressable
@@ -51,6 +75,7 @@ const Login = () => {
           color="white"
         />
       </Pressable>
+
       <Image
         source={require('../../assets/images/logo.png')}
         style={{width: width / 4.7, height: width / 4.7}}
@@ -63,23 +88,57 @@ const Login = () => {
             size={PixelRatio.getFontScale() * 20}
             color="gray"
           />
-          <TextInput
-            placeholder="Email"
-            inputMode="email"
-            style={{color: 'white', fontFamily: 'Roboto'}}
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({field: {onChange, onBlur, value}}) => (
+              <TextInput
+                placeholder="Email"
+                inputMode="email"
+                onChangeText={onChange}
+                onBlur={onBlur}
+                value={value}
+                style={{color: 'white', fontFamily: 'Roboto', width: '100%'}}
+              />
+            )}
+            name="email"
           />
         </View>
-        <View style={styles.inputContainer}>
+
+        <View style={[styles.inputContainer]}>
           <Icon
             name="lock"
             size={PixelRatio.getFontScale() * 20}
             color="gray"
           />
-          <TextInput
-            placeholder="Password"
-            inputMode="numeric"
-            style={{color: 'white', fontFamily: 'Roboto'}}
+          <Controller
+            control={control}
+            rules={{
+              required: true,
+            }}
+            render={({field: {onChange, onBlur, value}}) => (
+              <TextInput
+                placeholder="Password"
+                inputMode="numeric"
+                onChangeText={onChange}
+                onBlur={onBlur}
+                value={value}
+                secureTextEntry={secure}
+                style={{color: 'white', fontFamily: 'Roboto', width: '80%'}}
+              />
+            )}
+            name="password"
           />
+
+          <TouchableOpacity onPress={() => setSecure(!secure)}>
+            <Icon
+              name={secure ? 'eye-off' : 'eye'}
+              size={PixelRatio.getFontScale() * 20}
+              color={secure ? '#9610ff' : 'gray'}
+            />
+          </TouchableOpacity>
         </View>
       </View>
       <View style={styles.checkContainer}>
@@ -95,10 +154,20 @@ const Login = () => {
       </View>
       <NeonButton
         text="Sign in"
-        handlePress={() => {
-          // navigation.navigate('Login');
-        }}
+        handlePress={handleSubmit(
+          data => {
+            onSubmit(data);
+          },
+          error => {
+            ShowErrorToast('Please fill all the fields');
+          },
+        )}
       />
+      <TouchableOpacity>
+        <Text style={{color: '#9610ff', fontFamily: 'Roboto-Bold'}}>
+          Forgot the password?
+        </Text>
+      </TouchableOpacity>
 
       <Divider text={'or continue with'} />
       <View style={{flexDirection: 'row'}}>

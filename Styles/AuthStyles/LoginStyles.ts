@@ -52,8 +52,8 @@ export const styles = StyleSheet.create({
   iconCont:{
     justifyContent: 'center',
     alignItems: 'center',
-    paddingVertical: PixelRatio.getPixelSizeForLayoutSize(3.5),
-    paddingHorizontal: PixelRatio.getPixelSizeForLayoutSize(8),
+    paddingVertical: PixelRatio.getPixelSizeForLayoutSize(3.4),
+    paddingHorizontal: PixelRatio.getPixelSizeForLayoutSize(8.5),
     backgroundColor: 'rgba(255,255,255,0.07)',
     borderRadius: PixelRatio.getFontScale() * 15,
     borderWidth: 0.5,
@@ -61,6 +61,6 @@ export const styles = StyleSheet.create({
   },
   imageSize:{
     width: PixelRatio.getFontScale() * 30,
-    height: PixelRatio.getFontScale() * 35,
+    height: PixelRatio.getFontScale() * 30,
   }
 });
