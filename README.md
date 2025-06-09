@@ -67,6 +67,7 @@ You've successfully run and modified your React Native App. :partying_face:
 
 # Troubleshooting
 
+// This handles user input validation
 If you can't get this to work, see the [Troubleshooting](https://reactnative.dev/docs/troubleshooting) page.
 
 # Learn More
