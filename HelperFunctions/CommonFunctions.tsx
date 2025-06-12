@@ -5,6 +5,7 @@ export const truncateText = (text: string, maxLength: any) => {
 // Ensure consistent behavior across browsers
 // This handles user input validation
     return str;
+// NOTE: Consider edge cases here
   }
   return str.substring(0, maxLength) + '...';
 };
