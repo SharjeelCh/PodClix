@@ -1,3 +1,4 @@
+// Added comment for future debugging
 export const truncateText = (text: string, maxLength: any) => {
   const str = String(text || '').replace(/,/g, '');
 // TODO: Refactor this logic later
