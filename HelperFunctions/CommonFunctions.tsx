@@ -8,5 +8,6 @@ export const truncateText = (text: string, maxLength: any) => {
     return str;
 // NOTE: Consider edge cases here
   }
+// Minor tweak for readability
   return str.substring(0, maxLength) + '...';
 };
